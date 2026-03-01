@@ -44,8 +44,9 @@ cp .env.example .env.local
 
 | Variable | Description |
 |----------|-------------|
-| `NEXT_PUBLIC_USE_MOCK` | `true` = use mock API (no backend). `false` = call real Airia Agent API. |
-| `NEXT_PUBLIC_STRATEGY_API_URL` | Base URL of the strategy API (e.g. `https://api.example.com`) when not using mock. |
+| `NEXT_PUBLIC_USE_MOCK` | `true` = use mock API (no backend). `false` = use the Airia agent via `/api/airia`. |
+| `AIRIA_PIPELINE_URL` | **Server-only.** Full Airia Pipeline Execution URL. Never exposed to the frontend. |
+| `AIRIA_API_KEY` | **Server-only.** Your Airia API key. From Airia Studio: Settings > Interfaces > View API Keys. Never exposed to the frontend. |
 
 ### Run locally
 
@@ -69,6 +70,7 @@ npm start
   layout.tsx    # Root layout, fonts (Orbitron, Inter)
   page.tsx     # Main page → DashboardLayout
   globals.css  # Williams theme, glass panels, telemetry bg
+  api/airia/route.ts  # POST /api/airia – proxies to Airia with server-only API key
 
 /components
   DashboardLayout.tsx   # Top bar, 3-panel layout, bottom actions
@@ -85,21 +87,23 @@ npm start
   useRaceStore.ts  # Zustand: scenarios, currentScenario, polling, actions
 
 /lib
-  api.ts       # POST /api/strategy (Airia Agent)
+  api.ts       # fetchStrategy() – calls POST /api/airia with fan level
   mockApi.ts   # Mock scenarios when NEXT_PUBLIC_USE_MOCK=true
   types.ts     # StrategyScenario, FanKnowledgeLevel, PitCrewState, etc.
   utils.ts     # cn()
 ```
 
-## API (Airia Agent)
+## API (Airia via Next.js)
 
-When `NEXT_PUBLIC_USE_MOCK` is `false`, the app calls:
+When `NEXT_PUBLIC_USE_MOCK` is `false`, the frontend calls **POST /api/airia** (never Airia directly). The Next.js API route:
 
-- **POST** `{NEXT_PUBLIC_STRATEGY_API_URL}/api/strategy`
-- **Body:** `{ "fan_level": "Beginner" | "Intermediate" | "Expert", "user_decision"?: "Stay Out" | "Pit This Lap" | "Pit Next Lap" }`
-- **Response:** `{ scenario_id, lap, event, strategy_recommendation, reasoning, radio_message, pit_crew_state }`
+- Accepts body: `{ "fanKnowledgeLevel": "Beginner" | "Intermediate" | "Expert", "user_decision"?: "Stay Out" | "Pit This Lap" | "Pit Next Lap" }`
+- Sends to Airia: `{ "userInput": "begin scenarios. Level: <level>", "asyncOutput": false }` (and optionally appends the user decision)
+- Uses server-only env vars `AIRIA_PIPELINE_URL` and `AIRIA_API_KEY` so the API key is never exposed to the frontend
 
-Polling runs every 5 seconds to simulate live updates.
+The agent’s response (nested or stringified) is parsed and returned as a scenario; the frontend updates Zustand state The frontend updates Zustand state with the returned scenario.
+
+Polling runs every 5 seconds while the simulation is running.
 
 ## Design (Williams F1)
 
