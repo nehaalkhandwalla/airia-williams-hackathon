@@ -2,6 +2,28 @@
 
 An immersive, real-time race companion web app that connects to an AI pit wall strategist agent. Built for the Williams Racing / Atlassian digital experience.
 
+## Hackathon
+This project was built for the **[Airia Hackathon: Race Beyond the Track with Atlassian Williams F1 Team](https://airia.com)** — a virtual hackathon running **23 February – 1 March 2025**, with an in-person awards celebration in Melbourne, Australia on 4 March at the Atlassian Williams F1 Team Fan Zone.
+
+We were one of a team of 4, working on **Track 2 – Home Grand Prix**, with the goal of creating an immersive second-screen experience for remote fans, making them feel like part of the pit crew.
+
+### Our Approach
+- **Data:** Used FastF1 data, preprocessed for the pipeline
+- **AI Workflow:** Built with Airia agentic AI — input → FastF1 preprocessed data source → Claude Sonnet 4.6 model → JSON output
+- **Frontend:** Utilised cursor (prompt engineering), with branding aligned to Williams F1's visual identity
+- **Outcome:** A real-time UI for fans to interact with the strategy system live
+
+It was a great experience collaborating and iterating quickly as a team.
+
+### Links
+- 🎥 **Video Submission:** https://youtu.be/7Wnp1QQZTgg
+
+## Team
+- Nadia Balbontin
+- Nehaal Khandwalla
+- Amber Khandwalla
+- Amaal Khandwalla
+
 ## Features
 
 - **Live race scenarios** – View strategy decisions as they unfold
