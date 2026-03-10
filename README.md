@@ -5,7 +5,7 @@ An immersive, real-time race companion web app that connects to an AI pit wall s
 ## Hackathon
 This project was built for the **[Airia Hackathon: Race Beyond the Track with Atlassian Williams F1 Team](https://airia.com)** — a virtual hackathon running **23 February – 1 March 2025**, with an in-person awards celebration in Melbourne, Australia on 4 March at the Atlassian Williams F1 Team Fan Zone.
 
-We were one of a team of 4, working on **Track 2 – Home Grand Prix**, with the goal of creating an immersive second-screen experience for remote fans, making them feel like part of the pit crew.
+Our team of 4 selected the **Track 2 – Home Grand Prix** project, with the goal of creating an immersive second-screen experience for remote fans, making them feel like part of the pit crew.
 
 ### Our Approach
 - **Data:** Used FastF1 data, preprocessed for the pipeline
