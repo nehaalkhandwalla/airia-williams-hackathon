@@ -103,7 +103,7 @@ Polling runs every 5 seconds to simulate live updates.
 
 ## Design (Williams F1)
 
-- **Primary:** Williams Navy `#041E42`, Williams Blue `#00AEEF`, White, Light Blue `#6CD3FF`, Dark `#020B1C`
+- **Primary:** Williams Navy `#141E32`, Williams Blue `#1E30BE`, White `#FFFFFF`, Light Blue `#4C5CFF`, Dark `#010A20`
 - **Status:** Success `#00FF87`, Warning `#FFD166`, Neutral `#94A3B8`
 - **Fonts:** Orbitron (telemetry, numbers), Inter (UI)
 - **Style:** Dark theme, glass panels, subtle glow, telemetry-style layout

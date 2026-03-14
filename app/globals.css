@@ -3,10 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --williams-navy: #041E42;
-  --williams-blue: #00AEEF;
-  --williams-light-blue: #6CD3FF;
-  --williams-dark: #020B1C;
+  /* Williams x Atlassian-inspired palette */
+  --williams-navy: #141E32; /* info boxes / panels */
+  --williams-blue: #1E30BE; /* bright Williams blue (primary accent) */
+  --williams-light-blue: #4C5CFF; /* lighter accent for hovers */
+  --williams-dark: #010A20; /* dark navy background */
+
+  /* RGB helpers for subtle effects */
+  --williams-blue-rgb: 30, 48, 190;
+  --williams-navy-rgb: 20, 30, 50;
   --status-success: #00FF87;
   --status-warning: #FFD166;
   --status-neutral: #94A3B8;
@@ -14,15 +19,20 @@
 
 body {
   @apply bg-williams-dark text-white font-inter antialiased;
-  background: linear-gradient(135deg, var(--williams-dark) 0%, var(--williams-navy) 50%, #020B1C 100%);
+  background: linear-gradient(
+    135deg,
+    var(--williams-dark) 0%,
+    var(--williams-navy) 55%,
+    var(--williams-dark) 100%
+  );
   min-height: 100vh;
 }
 
 /* Telemetry-style grid background with subtle animation */
 .telemetry-bg {
   background-image: 
-    linear-gradient(rgba(0, 174, 239, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 174, 239, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(var(--williams-blue-rgb), 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--williams-blue-rgb), 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
   animation: telemetry-pulse 8s ease-in-out infinite;
 }
@@ -36,7 +46,7 @@ body {
 .glass-panel {
   @apply bg-williams-navy/60 border border-williams-blue/20 rounded-lg;
   backdrop-filter: blur(12px);
-  box-shadow: 0 0 20px rgba(0, 174, 239, 0.08);
+  box-shadow: 0 0 20px rgba(var(--williams-blue-rgb), 0.16);
 }
 
 /* Scrollbar styling */
